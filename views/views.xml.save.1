@@ -1,0 +1,121 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="lol_esports.list">
+      <field name="name">League Esports Leagues List</field>
+      <field name="model">lol_esports.lol_esports</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="leagueName"/>
+          <field name="leagueDescription"/>
+          <field name="startDate"/>
+	  <field name="endDate"/>
+          <field name="leagueLogo"/>
+	  <field name="numberOfTeams"/>
+          <field name="isMajorLeague"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+
+<record model="ir.ui.view" id="lol_esports.view_form_lol">
+      <field name="name">LoL Esports form</field>
+      <field name="model">lol_esports.lol_esports</field>
+      <field name="arch" type="xml">
+
+        <form string="Student Form">
+          <sheet>
+            <group colspan="4">
+
+		<!-- Dos grupos --> 
+
+              <group>
+                <separator string="Datos de la liga" colspan="2"/>
+                <field name="leagueName" string="Nombre" required="1"/>
+                <field name="leagueDescription" string="Descripción de la liga" required="1"/>
+		<field name="leagueLogo" string="Imagen" widget="image" required="1"/>                
+              </group>
+
+              <group>
+                <separator string="Mas información" colspan="2"/>
+                <field name="startDate" string="Fecha de comienzo"/>
+                <field name="endDate" string="Fecha de finalización"/>
+                <field name="numberOfTeams" string="Numero de equipos" />
+                <field name="isMajorLeague" string="¿Es una liga mayor?" invisible="1" />
+              </group>
+            </group>
+
+		<!-- Las dos tabs -->
+
+            <group>
+		<notebook>
+     		    <page string="Equipos">
+         	       <field name="startDate"/>
+     		    </page>  
+     		    <page string="Campo de texto">
+         	       <field name="endDate"/>
+     		    </page>   
+ 		</notebook>
+	    </group>		
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="lol_esports.action_window">
+      <field name="name">LoL esports</field>
+      <field name="res_model">lol_esports.lol_esports</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="lol_esports.action_window2">
+      <field name="name">LoL esports</field>
+      <field name="res_model">lol_esports.lol_teams</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="lol_esports.action_server">
+      <field name="name">lol_esports server</field>
+      <field name="model_id" ref="model_lol_esports_lol_esports"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <!-- Pa que salga en el menu de los cuadraditos -->
+    <menuitem name="LoL Esports" id="lol_esports.menu_root"/>
+
+    <!-- menu categories -->
+    <!-- Para que salga en la barra superior dentro del modulo -->
+    <menuitem name="Leagues list" id="lol_esports.menu_1" parent="lol_esports.menu_root"/> 
+    <menuitem name="Team list" id="lol_esports.menu_2" parent="lol_esports.menu_root"/>
+   
+    <!-- actions -->
+
+
+    <menuitem name="Ligas" id="lol_esports.menu_1_list" parent="lol_esports.menu_1"
+              action="lol_esports.action_window"/>
+    <menuitem name="Equipos" id="lol_esports.menu_2_list" parent="lol_esports.menu_2"
+              action="lol_esports.action_window2"/>
+<!--
+    <menuitem name="Server to list" id="lol_esports" parent="lol_esports.menu_2"
+              action="lol_esports.action_server"/>
+-->  
+</data>
+</odoo>

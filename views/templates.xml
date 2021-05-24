@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+      <template id="lol_esports_competitivo">
+          <t t-call="web.html_container">
+
+	   <!-- For para imprimir todas las ligas -->
+
+              <t t-foreach="docs" t-as="doc">
+                      <t t-call="web.external_layout">           
+                          <div class="page">
+				
+			      <p style="float: right; margin-top: 0px;"><span t-field="doc.leagueLogo" t-options="{'widget': 'image', 'style':'width: 80px;height: 80px'}"/></p>			      
+			      <div style="border-bottom: 2px solid black;" id="div_con_borde">
+				<h1 style="font-weight: 900" t-field="doc.leagueName"/>
+				<p style="font-weight: bold;">Description: <span style="font-weight: normal" t-field="doc.leagueDescription"/></p>
+			      </div>
+
+			      <div style="margin-top: 15px" id="mas_datos">
+				 <p style="float: left; margin-right: 32px; font-weight: bold;">Start Date: <span style="font-weight: normal;" t-field="doc.startDate"/></p>
+				 <p style="float: left; margin-right: 32px; font-weight: bold;">End Date: <span style="font-weight: normal;" t-field="doc.endDate"/></p>
+				 <p style="float: left; margin-right: 32px; font-weight: bold;">Number of teams: <span style="font-weight: normal;" t-field="doc.numberOfTeams"/></p>
+				 <p style="float: left; margin-right: 32px; font-weight: bold;">Is a major league?: <span style="font-weight: normal;" t-field="doc.isMajorLeague"/></p>
+			      </div>                                          
+					
+			      <div style="margin-top: 60px;" id="segundoFor">
+				 <h3 style="font-weight: bold">Teams</h3>
+				
+				<!-- For para imprimir todos los equipos de cada liga -->
+ 
+				  <t t-foreach="doc.ligas" t-as="teams">
+				   
+				    <div id="padre" style="clear: left; margin-top: 30px; border-bottom: 0px dashed black">
+			             	<div style="float: left;" id="div-img">
+			                   <p style="margin-bottom: 50px"><span t-field="teams.teamLogo" t-options="{'widget': 'image', 'style':'width: 60px;height: 60px'}"/></p>
+			            	</div>
+			            	<div style="float: left; margin-left: 25px" id="div-data-1">
+			                   <p style="font-weight: bold">Name: <span style="font-weight: normal" t-field="teams.teamName"/></p>
+			                   <p style="font-weight: bold">Region: <span style="font-weight: normal" t-field="teams.teamRegion"/></p>  
+					</div>
+					<div style="margin-top: 0px; float: left; margin-left: 25px" id="div-data-2">
+					   <p style="font-weight: bold">Foundation year: <span style="font-weight: normal" t-field="teams.teamFoundationYear"/></p>
+                                           <p style="font-weight: bold">Number of players: <span style="font-weight: normal" t-field="teams.numberOfPlayers"/></p>
+					</div>
+					<div style="float: left; margin-left: 25px" id="div-data-3">
+     					   <p style="font-weight: bold">Current champion: <span style="font-weight: normal" t-field="teams.currentChampion"/></p>
+					   <p style="font-weight: bold">Origin country: <span style="font-weight: normal" t-field="teams.originCountry"/></p>
+					</div>
+					
+					<div>
+					  <p style="clear: left; border-bottom: 1px dashed black"></p>
+					</div>
+
+			            </div>			
+				 
+				    </t>
+				</div>                                                                                        
+                          </div>
+                      </t>                  
+              </t>
+          </t>
+      </template>
+    </data>
+</odoo>
+

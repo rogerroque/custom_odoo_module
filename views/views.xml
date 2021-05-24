@@ -1,0 +1,182 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+<!-- ******************************************************************** -->
+<!-- ******************* Views para las ligas *************************** -->
+<!-- ******************************************************************** -->
+
+
+    <record model="ir.ui.view" id="lol_esports.list">
+      <field name="name">League Esports Leagues List</field>
+      <field name="model">lol_esports.lol_esports</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="leagueName"/>
+          <field name="leagueDescription"/>
+          <field name="startDate"/>
+	  <field name="endDate"/>
+          <field name="leagueLogo"/>
+	  <field name="numberOfTeams"/>
+          <field name="isMajorLeague"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="lol_esports.view_form_lol">
+      <field name="name">LoL Esports form</field>
+      <field name="model">lol_esports.lol_esports</field>
+      <field name="arch" type="xml">
+
+        <form string="Leauges Form">
+          <sheet>
+            <group colspan="4">
+
+		<!-- Dos grupos --> 
+
+              <group>
+                <separator string="Datos de la liga" colspan="2"/>
+                <field name="leagueName" string="Nombre" required="1"/>
+                <field name="leagueDescription" string="Descripción de la liga" required="1"/>
+		<field name="leagueLogo" string="Imagen" widget="image" required="1"/>                
+              </group>
+
+              <group>
+                <separator string="Mas información" colspan="2"/>
+                <field name="startDate" string="Fecha de comienzo"/>
+                <field name="endDate" string="Fecha de finalización"/>
+                <field name="numberOfTeams" string="Numero de equipos" />
+                <field name="isMajorLeague" string="¿Es una liga mayor?" invisible="0" />
+              </group>
+            </group>
+
+		<!-- Las dos tabs -->
+
+            <group>
+		<notebook>
+     		    <page string="Equipos">
+         	       <field name="ligas"/>
+     		    </page>  
+     		    <page string="Campo de texto">
+         	       <field name="textField"/>
+     		    </page>   
+ 		</notebook>
+	    </group>		
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+
+
+<!-- ******************************************************************** -->
+<!-- ******************* Views para los equipos ************************* -->
+<!-- ******************************************************************** -->
+
+
+    <record model="ir.ui.view" id="lol_esports.list2">
+      <field name="name">League Esports Teams List</field>
+      <field name="model">lol_esports.lol_teams</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="teamName"/>
+          <field name="teamRegion"/>
+          <field name="teamFoundationYear"/>
+          <field name="teamLogo"/>
+          <field name="numberOfPlayers"/>
+          <field name="currentChampion"/>
+	  <field name="teamLeague"/>
+	  <field name="originCountry"/>
+        </tree>
+      </field>
+    </record>
+
+
+<record model="ir.ui.view" id="lol_esports.view_form_lol2">
+      <field name="name">LoL Esports form</field>
+      <field name="model">lol_esports.lol_teams</field>
+      <field name="arch" type="xml">
+
+        <form string="Teams Form">
+          <sheet>
+            <group colspan="4">
+
+                <!-- Dos grupos -->
+
+              <group>
+                <separator string="Datos del equipo" colspan="2"/>
+                <field name="teamName" string="Nombre" required="1"/>
+                <field name="teamRegion" string="Region" required="1"/>
+                <field name="teamLogo" string="Imagen" widget="image" required="1"/>
+		<field name="teamLeague" string="Liga" required="1"/>
+              </group>
+
+              <group>
+                <separator string="Mas información" colspan="2"/>
+                <field name="teamFoundationYear" string="Año de fundación"/>
+                <field name="numberOfPlayers" string="Nº de jugadores"/>
+                <field name="currentChampion" string="Vigente campeón?"/>
+		<field name="originCountry" string="Pais de origen"/>
+              </group>
+            </group>
+
+                <!-- Las dos tabs -->
+	<!--
+            <group>
+                <notebook>
+                    <page string="Equipos">
+                       <field name="startDate"/>
+                    </page>
+                    <page string="Campo de texto">
+                       <field name="endDate"/>
+                    </page>
+                </notebook>
+            </group>
+	-->
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="lol_esports.action_window">
+      <field name="name">LoL esports</field>
+      <field name="res_model">lol_esports.lol_esports</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="lol_esports.action_window2">
+      <field name="name">LoL esports</field>
+      <field name="res_model">lol_esports.lol_teams</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+   
+
+    
+    <!-- Para que salga en el menu de los cuadraditos -->
+   
+    <menuitem name="LoL Esports" id="lol_esports.menu_root"/>
+
+   
+    <!-- Para que salga en la barra superior dentro del modulo -->
+   
+    <menuitem name="Leagues list" id="lol_esports.menu_1" parent="lol_esports.menu_root"/> 
+    <menuitem name="Team list" id="lol_esports.menu_2" parent="lol_esports.menu_root"/>
+   
+   
+    <!-- Para que se muestre en submenu de los botones de la barra superior del modulo -->
+   
+    <menuitem name="Leagues" id="lol_esports.menu_1_list" parent="lol_esports.menu_1"
+              action="lol_esports.action_window"/>
+    <menuitem name="Teams" id="lol_esports.menu_2_list" parent="lol_esports.menu_2"
+              action="lol_esports.action_window2"/>
+  
+</data>
+</odoo>

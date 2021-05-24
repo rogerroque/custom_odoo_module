@@ -1,0 +1,39 @@
+ #-*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+
+class lol_esports(models.Model):
+    _name = 'lol_esports.lol_esports'
+    _description = 'lol_esports.lol_esports'
+
+    leagueName = fields.Char(size=30, string="Nombre")
+    leagueDescription = fields.Char(string="Descripción")
+    startDate = fields.Date(string="Fecha comienzo")
+    endDate = fields.Date(string="Fecha final")
+    leagueLogo = fields.Image(string="")
+    numberOfTeams = fields.Integer(string="Nº equipos")
+    isMajorLeague = fields.Boolean(string="Es una liga mayor?")
+    textField = fields.Text(string="Some text?")
+    ligas = fields.One2Many
+#     value2 = fields.Float(compute="_value_pc", store=True)
+#     description = fields.Text()
+
+#     @api.depends('value')
+#     def _value_pc(self):
+#         for record in self:
+#             record.value2 = float(record.value) / 100
+
+
+class lol_esports_teams(models.Model):
+    _name = 'lol_esports.lol_teams'
+    _description = 'lol_esports.teams.lol.teams'
+
+    teamName = fields.Char(size=20)
+    teamRegion = fields.Char()
+    teamLeague = fields.Char() #Aqui va el many2One
+    teamFoundationYear = fields.Date()
+    teamLogo = fields.Image()
+    numberOfPlayers = fields.Integer()
+    currentChampion = fields.Boolean()
+    equipos = fields.Many2one('lol_esports.lol_esports', string="Equipos")

@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <report
+            id="report_lol_esports"
+            model="lol_esports.lol_esports"
+            string="Informe sobre la escena competitiva de LoL"
+            name="lol_esports.lol_esports_competitivo"
+            file="elpuig_v2.report_lol_esports"
+            menu="True"
+            report_type="qweb-pdf"
+        />
+    </data>
+</odoo>
